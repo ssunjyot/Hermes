@@ -7,20 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @Log4j
-public class MailSenderAppController {
+public class MailSenderController {
 
     @Autowired
     private KafkaProducer kafkaProducer;
 
-    @RequestMapping(value = "/send", method = RequestMethod.POST)
+    @RequestMapping(value = "/mail", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public String send(@RequestBody Mail mail) {
-        kafkaProducer.sendGreeting("Hello there");
-
         log.info("Rest call came through");
+        kafkaProducer.sendMail(mail);
         return "OK";
     }
 }
