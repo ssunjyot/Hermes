@@ -8,10 +8,10 @@ import javax.annotation.PostConstruct;
 
 @SpringBootApplication
 @Log4j
-public class MailSenderApp {
+public class MailSenderApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MailSenderApp.class, args);
+		SpringApplication.run(MailSenderApplication.class, args);
 	}
 
 	@PostConstruct
