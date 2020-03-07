@@ -8,15 +8,15 @@ import javax.annotation.PostConstruct;
 
 @SpringBootApplication
 @Log4j
-public class MailApplication {
+public class MailSenderApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MailApplication.class, args);
+		SpringApplication.run(MailSenderApp.class, args);
 	}
 
 	@PostConstruct
 	public void postConstruct(){
-		log.info("SpringBoot Application Started");
+		log.info("SpringBoot Application Started!");
 	}
 
 }
