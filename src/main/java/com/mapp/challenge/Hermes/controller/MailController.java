@@ -1,6 +1,6 @@
 package com.mapp.challenge.Hermes.controller;
 
-import com.mapp.challenge.Hermes.model.Email;
+import com.mapp.challenge.Hermes.model.Mail;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ public class MailController {
 
     @RequestMapping(value = "/send", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public String send(@RequestBody Email email) {
+    public String send(@RequestBody Mail mail) {
         kafkaTemplate.send(topic,"Hi there");
 
         log.info("Rest call came through");

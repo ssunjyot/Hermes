@@ -7,7 +7,7 @@ import java.net.URI;
 
 @Getter
 @Setter
-public class Email {
+public class Mail {
     private String sender;
     private String recipient;
     private String subject;
