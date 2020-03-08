@@ -6,6 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.retry.RetryCallback;
+import org.springframework.retry.RetryContext;
+import org.springframework.retry.RetryListener;
+import org.springframework.retry.listener.RetryListenerSupport;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -17,6 +21,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Properties;
 
 @Log4j
@@ -80,4 +86,16 @@ public class MailSenderApplicationConfig {
         return apiInfo;
     }
 
+    @Bean
+    public List<RetryListener> retryListeners() {
+
+        return Collections.singletonList(new RetryListenerSupport() {
+
+            @Override
+            public <T, E extends Throwable> void onError(
+                    RetryContext context, RetryCallback<T, E> callback, Throwable throwable) {
+                log.info("Sending Failed. Retrying..");
+            }
+        });
+    }
 }

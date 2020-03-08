@@ -12,8 +12,10 @@ import org.springframework.retry.annotation.Retryable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
 @Log4j
@@ -24,30 +26,28 @@ public class MailSenderService {
     @Autowired
     private JavaMailSender mailer;
 
-    @Retryable(backoff = @Backoff(delayExpression = "#{${sender.retry.delay}}"),maxAttemptsExpression = "#{${sender.retries}}")
+    @Retryable(
+            value = { IOException.class, MessagingException.class },
+            backoff = @Backoff(delayExpression = "#{${sender.retry.delay}}"),
+            maxAttemptsExpression = "#{${sender.retries}}")
     @Async
-    public String sendMail(Mail mail) {
+    public String sendMail(Mail mail) throws IOException, MessagingException {
         MimeMessage mailWithAttachment = mailer.createMimeMessage();
 
-        try {
-            URL fileURL = mail.getAttachment().toURL();
+        URL fileURL = mail.getAttachment().toURL();
 
-            File attachment = new File(FileUtils.getTempDirectory(),getFileName(fileURL.toString()));
-            FileUtils.copyURLToFile(fileURL, attachment);
+        File attachment = new File(FileUtils.getTempDirectory(),getFileName(fileURL.toString()));
+        FileUtils.copyURLToFile(fileURL, attachment);
 
-            MimeMessageHelper helper = new MimeMessageHelper(mailWithAttachment, true);
+        MimeMessageHelper helper = new MimeMessageHelper(mailWithAttachment, true);
 
-            helper.setFrom(mail.getSender());
-            helper.setTo(mail.getRecipient());
-            helper.setSubject(mail.getSubject());
-            helper.setText(mail.getBody());
-            helper.addAttachment(attachment.getName(), attachment);
-        } catch (Exception e) {
-            log.error("Exception! Retrying..");
-            e.printStackTrace();
-        }
+        helper.setFrom(mail.getSender());
+        helper.setTo(mail.getRecipient());
+        helper.setSubject(mail.getSubject());
+        helper.setText(mail.getBody());
+        helper.addAttachment(attachment.getName(), attachment);
+
         mailer.send(mailWithAttachment);
-
         log.info("Mail was sent to : " + mail.getRecipient());
 
         return "Successful";

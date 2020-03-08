@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
+import javax.mail.MessagingException;
 import java.io.IOException;
 
 @Log4j
@@ -17,7 +18,7 @@ public class KafkaConsumer {
     private MailSenderService mailSenderService;
 
     @KafkaListener(topics = "${kafka.topic.name}", groupId = "${kafka.group.name}", containerFactory = "kafkaListenerContainerFactory")
-    public void consume(Mail mail) throws IOException {
+    public void consume(Mail mail) throws IOException, MessagingException {
         log.debug("Kafka Consumer got Mail Object");
 
         mailSenderService.sendMail(mail);
