@@ -23,8 +23,11 @@ import java.net.URL;
 @EnableRetry
 public class MailSenderService {
 
-    @Autowired
     private JavaMailSender mailer;
+
+    public MailSenderService (JavaMailSender mailer){
+        this.mailer = mailer;
+    }
 
     @Retryable(
             value = { IOException.class, MessagingException.class },
