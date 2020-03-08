@@ -1,6 +1,6 @@
-package com.mapp.challenge.Hermes.consumer;
+package com.mapp.challenge.hermes.consumer;
 
-import com.mapp.challenge.Hermes.model.Mail;
+import com.mapp.challenge.hermes.model.Mail;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;

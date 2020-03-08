@@ -1,6 +1,6 @@
-package com.mapp.challenge.Hermes.producer;
+package com.mapp.challenge.hermes.producer;
 
-import com.mapp.challenge.Hermes.model.Mail;
+import com.mapp.challenge.hermes.model.Mail;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;

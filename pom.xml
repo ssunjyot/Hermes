@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mapp.challenge</groupId>
-	<artifactId>Hermes</artifactId>
+	<artifactId>hermes</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Hermes</name>
 	<description>A Micro Service for sending emails asynchronously.</description>

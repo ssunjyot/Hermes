@@ -1,6 +1,6 @@
-package com.mapp.challenge.Hermes.service;
+package com.mapp.challenge.hermes.service;
 
-import com.mapp.challenge.Hermes.model.Mail;
+import com.mapp.challenge.hermes.model.Mail;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;

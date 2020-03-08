@@ -1,4 +1,4 @@
-package com.mapp.challenge.Hermes;
+package com.mapp.challenge.hermes;
 
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Value;

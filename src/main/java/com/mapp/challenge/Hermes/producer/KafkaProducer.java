@@ -1,6 +1,6 @@
-package com.mapp.challenge.Hermes.producer;
+package com.mapp.challenge.hermes.producer;
 
-import com.mapp.challenge.Hermes.model.Mail;
+import com.mapp.challenge.hermes.model.Mail;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

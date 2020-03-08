@@ -1,4 +1,4 @@
-package com.mapp.challenge.Hermes.model;
+package com.mapp.challenge.hermes.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
