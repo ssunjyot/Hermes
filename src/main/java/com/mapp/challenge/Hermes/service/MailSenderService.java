@@ -4,7 +4,6 @@ import com.mapp.challenge.Hermes.model.Mail;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.retry.annotation.Backoff;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.internet.MimeMessage;
 import java.io.File;
+import java.net.URL;
 
 @Log4j
 @Service
@@ -30,8 +30,10 @@ public class MailSenderService {
         MimeMessage mailWithAttachment = mailer.createMimeMessage();
 
         try {
-            File attachment = new File(FileUtils.getTempDirectory(),"tmp");
-            FileUtils.copyURLToFile(mail.getAttachment().toURL(), attachment);
+            URL fileURL = mail.getAttachment().toURL();
+
+            File attachment = new File(FileUtils.getTempDirectory(),getFileName(fileURL.toString()));
+            FileUtils.copyURLToFile(fileURL, attachment);
 
             MimeMessageHelper helper = new MimeMessageHelper(mailWithAttachment, true);
 
@@ -49,5 +51,9 @@ public class MailSenderService {
         log.info("Mail was sent to : " + mail.getRecipient());
 
         return "Successful";
+    }
+
+    private String getFileName(String fileURLString) {
+        return fileURLString.substring(fileURLString.lastIndexOf("/") + 1, fileURLString.length());
     }
 }
