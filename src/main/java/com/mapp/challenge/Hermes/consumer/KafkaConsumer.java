@@ -2,7 +2,6 @@ package com.mapp.challenge.Hermes.consumer;
 
 import com.mapp.challenge.Hermes.model.Mail;
 import com.mapp.challenge.Hermes.service.MailSenderService;
-import com.mapp.challenge.Hermes.util.URIUtils;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
