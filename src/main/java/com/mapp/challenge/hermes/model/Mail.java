@@ -1,6 +1,7 @@
 package com.mapp.challenge.hermes.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,15 +15,25 @@ import java.util.Map;
 @Setter
 @Log4j
 public class Mail implements Serializer<Mail>, Deserializer<Mail> {
+
+    @ApiModelProperty(example = "from_adress@gmail.com")
     private String sender;
+
+    @ApiModelProperty(example = "to_adress@gmail.com")
     private String recipient;
+
+    @ApiModelProperty(example = "Email subject goes here")
     private String subject;
+
+    @ApiModelProperty(example = "Email content goes here")
     private String body;
+
+    @ApiModelProperty(example = "https://google.com/robots.txt")
     private URI attachment;
 
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
-        //Empty
+
     }
 
     @Override
@@ -40,7 +51,7 @@ public class Mail implements Serializer<Mail>, Deserializer<Mail> {
 
     @Override
     public void close() {
-        //Empty
+        
     }
 
     @Override
