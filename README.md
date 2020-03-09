@@ -1,4 +1,5 @@
 # Hermes
+
 Hermes is an application for sending emails asynchronously. It is named after the Greek god of communication :)
 
 Hermes sends emails asynchronously but provides synchronous acknowledgement over REST.<br/>
@@ -14,7 +15,6 @@ Internally, it uses Kafka as a queue in front of the service. Kafka is configura
 - Kafka is installed locally and running on port 9092<br/>
 - The Kafka topic `mail-queue` is created
 - Having Maven & Java 8 installed and on $PATH
-
 
 # Project Structure and Run Instructions
 
@@ -38,3 +38,11 @@ Swagger has been used to define the API. It allows for route exploration and tes
 
 Once the application is run, it can be found at the following address : <br/>
 http://localhost:4444/swagger-ui.html
+
+# Assumptions
+
+- On restarting the application, the Kafka topic will be consumed again from beginning(while testing, this can be countered by configuring the message retention policy accordingly)
+- Attachment can be in the form of uri to attachment binaries : `https://google.com/robots.txt`
+- File name is extracted using uri string supplied for the attachment.
+- If sending still failes after the configured number of retries, its considered a failure and the exception is logged.
+- The application prioritizes the usage of framework or library over reinventing the wheel.
